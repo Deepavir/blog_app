@@ -1,0 +1,16 @@
+<ul>
+<li>PLATFORM: Support for Eclipse Photon.</li>
+<li>PLATFORM: Angular IDE is now recognized by the installer</li>
+<li>PLATFORM: Many improvements for lombok's JDK10/11 support.</li>
+<li>BREAKING CHANGE: The <code>@FieldNameConstants</code> feature has been completely redesigned.  FieldNameConstants documentation</li>
+<li>BREAKING CHANGE: Lombok will now always copy specific annotations around (from field to getter, from field to builder 'setter', etcetera): A specific curated list of known annotations where that is the right thing to do (generally, <code>@NonNull</code> style annotations from various libraries), as well as any annotations you explicitly list in the <code>lombok.copyableAnnotations</code> config key in your <code>lombok.config</code> file. Also, lombok is more consistent about copying these annotations. (Previous behaviour: Lombok used to copy any annotation whose simple name was <code>NonNull</code>, <code>Nullable</code>, or <code>CheckForNull</code>).  and</li>
+<li>FEATURE: Lombok's <code>@NonNull</code> annotation can now be used on types (annotation on types has been introduced in JDK 8). <code>@Builder</code>'s <code>@Singular</code> annotation now properly deals with annotations on the generics type on the collection: <code>@Singular List&lt;@NonNull String&gt; names;</code> now does the right thing.</li>
+<li>FEATURE: You can now mix <code>@SuperBuilder</code> and <code>toBuilder</code>, and <code>toBuilder</code> no longer throws <code>NullPointerException</code> if a <code>@Singular</code>-marked collection field is <code>null</code>.</li>
+<li>FEATURE: delombok now supports module paths via the <code>--module-path</code> option, and will automatically add lombok itself to the module path. This should make it possible to delombok your modularized projects.</li>
+<li>FEATURE: You can pass <code>@args.txt</code> to <code>delombok</code> to read args from the text file; useful if you have really long classpaths you need to pass to delombok.</li>
+<li>BUGFIX: <code>@NoArgsConstructor(force=true)</code> would try to initialize already initialized final fields in Eclipse.</li>
+<li>BUGFIX: When using lombok to compile modularized (<code>module-info.java</code>-style) code, if the module name has dots in it, it wouldn't work.</li>
+<li>BUGFIX: Errors about lombok not reading a module providing <code>org.mapstruct.ap.spi</code> when trying to use lombok in jigsaw-mode on JDK 11.</li>
+<li>BUGFIX: Fix NetBeans compile on save.</li>
+<li>BUGFIX: If you manually write your builder class so you can add a few methods of your own, and those methods refer to generated methods, you'd usually run into various bizarre error messages, but only on JDK9/10/11. This one is hard to describe, but we fixed it.</li>
+</ul>
